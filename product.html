@@ -2,91 +2,144 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Пижама Mark Formelle</title>
+  <title>Пижама Mark Formelle — Demo Yandex Pay</title>
+
   <style>
-    body{font-family:Arial,sans-serif;margin:40px;background:#f7f7f7}
-    .wrap{max-width:900px;margin:0 auto;background:#fff;padding:20px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
-    .grid{display:flex;gap:24px;flex-wrap:wrap}
-    img{width:320px;border-radius:12px}
-    .price{font-size:22px;font-weight:700;margin:10px 0}
-    .badge{margin:12px 0;padding:12px;border:1px solid #ddd;border-radius:10px;background:#fafafa;max-width:320px}
-    .btn{display:inline-block;padding:10px 14px;background:#000;color:#fff;text-decoration:none;border-radius:8px;margin-top:10px}
-    .muted{color:#666}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #f7f7f7;
+    }
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.1);
+    }
+    .grid {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    img {
+      width: 320px;
+      border-radius: 12px;
+    }
+    .price {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 10px 0;
+    }
+    .badge {
+      margin: 12px 0;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: #fafafa;
+      max-width: 320px;
+      font-size: 14px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 16px;
+      background: #000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    .muted {
+      color: #666;
+      font-size: 14px;
+    }
+    a.back {
+      display: inline-block;
+      margin-bottom: 16px;
+      color: #666;
+      text-decoration: none;
+    }
   </style>
 </head>
-<script>
-  /**
-   * ДЕМО инициализации платёжного виджета Яндекс Пэй
-   * В реальном проекте SDK подключается с CDN Яндекса
-   * и платёж создаётся через backend (order / payment intent)
-   */
 
-  document.addEventListener('DOMContentLoaded', () => {
-
-    // Данные заказа (в бою приходят с backend)
-    const paymentData = {
-      amount: 1263,
-      currency: 'RUB',
-      installments: 4,
-      product: {
-        id: 'MF-001',
-        name: 'Пижама Mark Formelle'
-      },
-      customer: {
-        email: 'test@example.com'
-      }
-    };
-
-    console.log('Yandex Pay init:', paymentData);
-
-    // Мок инициализации виджета
-    const payButton = document.querySelector('.btn');
-
-    if (payButton) {
-      payButton.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        alert(
-          'Демо Яндекс Пэй\n\n' +
-          'Сумма: ' + paymentData.amount + ' ₽\n' +
-          'Платежей: ' + paymentData.installments + '\n\n' +
-          'В реальном проекте здесь открывается платёжный виджет.'
-        );
-
-        // Здесь в бою:
-        // YandexPay.open(paymentData)
-      });
-    }
-
-  });
-</script>
 <body>
+
   <div class="wrap">
-    <a class="muted" href="./index.html">← Назад в каталог</a>
+
+    <a class="back" href="./index.html">← Назад в каталог</a>
+
     <h1>Пижама Mark Formelle</h1>
 
     <div class="grid">
       <img src="https://via.placeholder.com/320x420" alt="Пижама">
+
       <div>
         <div class="price">1 263 ₽</div>
         <div class="muted">Цвет: жёлтый · Размер: 46</div>
 
-        <!-- БЕЙДЖ/ВИДЖЕТ (демо) -->
+        <!-- БЕЙДЖ РАССРОЧКИ -->
         <div class="badge">
           <b>316 ₽ × 4 платежа</b><br>
           <span class="muted">Без переплат · Яндекс Пэй</span>
         </div>
 
-        <a class="btn" href="#" onclick="alert('Демо: здесь открывается платёжный виджет Яндекс Пэй'); return false;">
-          Купить
-        </a>
+        <a href="#" class="btn" id="payBtn">Купить</a>
 
         <p class="muted" style="margin-top:14px">
-          Демо-страница для собеседования: показ встроенного бейджа/виджета и структуры интеграции.
+          Демо-страница для собеседования.  
+          Показ структуры интеграции платёжного виджета Яндекс Пэй.
         </p>
       </div>
     </div>
   </div>
+
+  <!-- ДЕМО JS-ИНИЦИАЛИЗАЦИЯ -->
+  <script>
+    /**
+     * ДЕМО интеграции Яндекс Пэй
+     * В реальном проекте SDK подключается с CDN
+     * Платёж создаётся через backend
+     */
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Данные заказа (в бою приходят с backend)
+      const paymentData = {
+        amount: 1263,
+        currency: 'RUB',
+        installments: 4,
+        product: {
+          id: 'MF-001',
+          name: 'Пижама Mark Formelle'
+        },
+        customer: {
+          email: 'test@example.com'
+        }
+      };
+
+      console.log('Yandex Pay init:', paymentData);
+
+      const payButton = document.getElementById('payBtn');
+
+      if (payButton) {
+        payButton.addEventListener('click', (e) => {
+          e.preventDefault();
+
+          alert(
+            'Демо Яндекс Пэй\n\n' +
+            'Сумма: ' + paymentData.amount + ' ₽\n' +
+            'Платежей: ' + paymentData.installments + '\n\n' +
+            'В реальном проекте здесь открывается платёжный виджет.'
+          );
+
+          // В бою:
+          // YandexPay.open(paymentData)
+        });
+      }
+
+    });
+  </script>
+
 </body>
 </html>
-
