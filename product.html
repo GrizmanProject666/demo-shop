@@ -14,6 +14,52 @@
     .muted{color:#666}
   </style>
 </head>
+<script>
+  /**
+   * ДЕМО инициализации платёжного виджета Яндекс Пэй
+   * В реальном проекте SDK подключается с CDN Яндекса
+   * и платёж создаётся через backend (order / payment intent)
+   */
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Данные заказа (в бою приходят с backend)
+    const paymentData = {
+      amount: 1263,
+      currency: 'RUB',
+      installments: 4,
+      product: {
+        id: 'MF-001',
+        name: 'Пижама Mark Formelle'
+      },
+      customer: {
+        email: 'test@example.com'
+      }
+    };
+
+    console.log('Yandex Pay init:', paymentData);
+
+    // Мок инициализации виджета
+    const payButton = document.querySelector('.btn');
+
+    if (payButton) {
+      payButton.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        alert(
+          'Демо Яндекс Пэй\n\n' +
+          'Сумма: ' + paymentData.amount + ' ₽\n' +
+          'Платежей: ' + paymentData.installments + '\n\n' +
+          'В реальном проекте здесь открывается платёжный виджет.'
+        );
+
+        // Здесь в бою:
+        // YandexPay.open(paymentData)
+      });
+    }
+
+  });
+</script>
 <body>
   <div class="wrap">
     <a class="muted" href="./index.html">← Назад в каталог</a>
