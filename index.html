@@ -16,6 +16,7 @@
     .catalog {
       display: flex;
       gap: 20px;
+      flex-wrap: wrap;
     }
     .card {
       background: #fff;
@@ -41,6 +42,15 @@
       font-size: 14px;
       background: #fafafa;
     }
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      background: #000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      margin-top: 12px;
+    }
   </style>
 </head>
 
@@ -50,24 +60,32 @@
 
 <div class="catalog">
 
+  <!-- ТОВАР 1 -->
   <div class="card">
     <img src="https://via.placeholder.com/260x320" alt="">
     <h3>Пижама Mark Formelle</h3>
     <div class="price">1 263 ₽</div>
+
     <div class="badge">
       <b>316 ₽ × 4 платежа</b><br>
       Без переплат · Яндекс Пэй
     </div>
+
+    <a class="btn" href="product.html">Подробнее</a>
   </div>
 
+  <!-- ТОВАР 2 -->
   <div class="card">
     <img src="https://via.placeholder.com/260x320" alt="">
     <h3>Тестовый товар</h3>
     <div class="price">2 500 ₽</div>
+
     <div class="badge">
       <b>625 ₽ × 4 платежа</b><br>
       Без переплат · Яндекс Пэй
     </div>
+
+    <a class="btn" href="product.html">Подробнее</a>
   </div>
 
 </div>
